@@ -11,7 +11,7 @@ lib: $(SRC)
 
 macro: $(SRC) lib
 	mkdir -p target
-	$(RUSTC) --out-dir target src/thrustmacro/lib.rs
+	$(RUSTC) -Ltarget --out-dir target src/thrustmacro/lib.rs
 
 test: $(SRC) lib macro
 	mkdir -p target

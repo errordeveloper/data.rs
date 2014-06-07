@@ -4,6 +4,7 @@
 
 //! Thrust Macros! Yay!
 
+extern crate thrust;
 extern crate syntax;
 
 use syntax::ast;
@@ -26,5 +27,7 @@ pub fn macro_registrar(register: |ast::Name, SyntaxExtension|) {
 
 #[allow(experimental)]
 fn native(cx: &mut ExtCtxt, sp: codemap::Span, tts: &[ast::TokenTree]) -> Box<MacResult> {
-  MacExpr::new(quote_expr!(cx, {}))
+  MacExpr::new(quote_expr!(cx, {
+    ::thrust::Thrust::new()
+  }))
 }
