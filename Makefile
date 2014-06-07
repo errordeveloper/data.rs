@@ -3,7 +3,7 @@ RUSTC_FLAGS ?=
 
 SRC = $(shell find src -name '*.rs')
 
-all: lib
+all: lib macro
 
 lib: $(SRC)
 	mkdir -p target
