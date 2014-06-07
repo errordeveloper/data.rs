@@ -13,23 +13,21 @@ mod test {
     use thrust::Server;
     use thrust::Thrust;
 
-    //#[test]
-    //fn empty() {
-    //    thrust!{
-    //    };
-    //}
+    #[test]
+    fn empty() {
+        thrust!{};
+    }
 
     #[test]
     fn thrust() {
         let thrust: Thrust = thrust!{
-            namespace
+            namespace foobar foo
         };
     }
 
     #[test]
     fn new_server() {
-        let thrust = thrust!{
-        };
+        let thrust = thrust!{};
         let server: Server = thrust.server("127.0.0.1", 4999);
     }
 

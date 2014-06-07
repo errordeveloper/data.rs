@@ -20,6 +20,7 @@ use syntax::parse;
 use syntax::parse::token;
 use syntax::print::pprust;
 use syntax::parse::parser::Parser;
+use syntax::ext::quote::rt::ToSource;
 
 pub struct ThriftParser<'a> {
     cx: &'a ExtCtxt<'a>,
@@ -58,7 +59,7 @@ impl<'a> ThriftParser<'a> {
 
         match *tok {
             token::IDENT(iden, _) => {
-                println!("{}",iden);
+                println!("{}", iden);
             },
             _ => {}
         }
@@ -77,11 +78,25 @@ pub fn macro_registrar(register: |ast::Name, SyntaxExtension|) {
 
 #[allow(experimental)]
 fn native(cx: &mut ExtCtxt, sp: codemap::Span, tts: &[ast::TokenTree]) -> Box<MacResult> {
-    let parser = ThriftParser::new(cx, sp, tts);
+    use syntax::print::pprust;
 
-    let code = parser.to_expr();
+    let mut parser = parse::new_parser_from_tts(cx.parse_sess(), cx.cfg(),
+                                                Vec::from_slice(tts));
 
-    MacExpr::new(quote_expr!(parser.cx, {
+    match parser.token {
+        token::IDENT(iden, _) => {
+            if iden.to_source() == "namespace".to_string() {
+                parser.bump();
+                let id = parser.parse_ident();
+            }
+
+            //let err = format!("Error: {} {}", pprust::tt_to_str(&ast::TTTok(parser.span.clone(), parser.token.clone())), s);
+            //cx.span_err(parser.span, err.as_slice());
+        },
+        _ => {}
+    }
+
+    MacExpr::new(quote_expr!(cx, {
         ::thrust::Thrust::new()
     }))
 }

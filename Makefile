@@ -17,6 +17,7 @@ test: $(SRC) lib macro
 	mkdir -p target
 	RUST_TEST_NOCAPTURE=1 $(RUSTC) --test -Ltarget --out-dir target src/thrusttest/lib.rs
 	./target/thrusttest
+	./test.py compile-fail
 
 clean:
 	@rm -rf target
