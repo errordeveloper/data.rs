@@ -15,7 +15,7 @@ macro: $(SRC) lib
 
 test: $(SRC) lib macro
 	mkdir -p target
-	$(RUSTC) --test -Ltarget --out-dir target src/thrusttest/lib.rs
+	RUST_TEST_NOCAPTURE=1 $(RUSTC) --test -Ltarget --out-dir target src/thrusttest/lib.rs
 	./target/thrusttest
 
 clean:
