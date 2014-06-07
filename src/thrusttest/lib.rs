@@ -3,16 +3,15 @@
 //! Thrust test.
 
 #[phase(syntax)]
+extern crate thrustmacro;
 extern crate thrust;
 
 #[cfg(test)]
 mod test {
 
   #[test]
-  fn parse() {
-    thrust!(
-      namespace foobar ThriftTest
-    );
+  fn empty() {
+    thrust!();
   }
 
 }
