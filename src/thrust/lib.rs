@@ -19,9 +19,9 @@ impl Thrust {
     }
   }
 
-  pub fn server(ip: String, port: u16) -> Server {
+  pub fn server(&self, ip: &str, port: u16) -> Server {
     Server {
-      ip: ip,
+      ip: ip.to_string(),
       port: port
     }
   }

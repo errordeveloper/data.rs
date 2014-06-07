@@ -22,4 +22,11 @@ mod test {
     let thrust: Thrust = thrust!();
   }
 
+  #[test]
+  fn new_server() {
+    let thrust = thrust!();
+
+    let server: Server = thrust.server("127.0.0.1", 4999);
+  }
+
 }
