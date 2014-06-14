@@ -21,7 +21,12 @@ mod test {
     #[test]
     fn thrust() {
         let thrust: Thrust = thrust!{
-            namespace foobar foo
+            namespace * hello
+        };
+
+
+        thrust!{
+            
         };
     }
 

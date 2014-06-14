@@ -29,6 +29,8 @@ pub struct ThriftParser<'a> {
     tree: &'a [ast::TokenTree]
 }
 
+pub struct Keyword(&'static str);
+
 impl<'a> ThriftParser<'a> {
 
     pub fn new(cx: &'a ExtCtxt, span: codemap::Span, tree: &'a [ast::TokenTree]) -> ThriftParser<'a> {
@@ -83,20 +85,19 @@ fn native(cx: &mut ExtCtxt, sp: codemap::Span, tts: &[ast::TokenTree]) -> Box<Ma
     let mut parser = parse::new_parser_from_tts(cx.parse_sess(), cx.cfg(),
                                                 Vec::from_slice(tts));
 
-    match parser.token {
-        token::IDENT(iden, _) => {
-            if iden.to_source() == "namespace".to_string() {
-                parser.bump();
-                let id = parser.parse_ident();
-            }
-
-            //let err = format!("Error: {} {}", pprust::tt_to_str(&ast::TTTok(parser.span.clone(), parser.token.clone())), s);
-            //cx.span_err(parser.span, err.as_slice());
-        },
-        _ => {}
-    }
+    expect_ident(&mut parser, "namespace");
 
     MacExpr::new(quote_expr!(cx, {
         ::thrust::Thrust::new()
     }))
+}
+
+
+fn expect_ident(parser: &mut Parser, ident: &str) {
+    fail!("foo {}", parser.parse_ident().to_source());
+    if parser.parse_ident().to_source().as_slice() != ident {
+        //parser.span_fatal(parser.span, "Fatal");
+    }
+
+    //parser.bump();
 }

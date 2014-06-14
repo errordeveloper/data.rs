@@ -6,6 +6,6 @@ extern crate thrust;
 
 fn main() {
     thrust! {
-        namespace
+        namespace * foobar
     };
 }
