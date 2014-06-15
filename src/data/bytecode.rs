@@ -2,8 +2,9 @@
 /// default bytecodes that are defined.
 pub struct Bytecode(int);
 
+/// A macro to easily create bytecodes.
 macro_rules! def(
-    ($inp:ident $sp:expr) => ( // invoke it like `(input_5 SpecialE)`
+    ($inp:ident $sp:expr) => (
         pub static $inp: Bytecode = Bytecode($sp);
     );
 )
