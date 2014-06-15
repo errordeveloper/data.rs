@@ -33,4 +33,5 @@
 
 /// All the default bytecode definitions.
 pub mod bytecode;
-
+pub mod stream;
+pub mod result;
