@@ -2,4 +2,4 @@
 /// default bytecodes that are defined.
 pub struct Bytecode(int);
 
-pub static FOO: Bytecode = Bytecode(5);
+pub static PRIORITY_CACHE_PACKED: Bytecode = Bytecode(5);

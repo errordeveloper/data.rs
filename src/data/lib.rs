@@ -1,6 +1,6 @@
 #![crate_id = "data"]
 #![crate_type = "lib"]
-#![feature(globs)]
+#![feature(globs, macro_rules)]
 
 //! ## Introduction
 //!
