@@ -1,8 +1,28 @@
-# Thrust
+# data.rs
 
-A thrift implementation for Rust utilizing Rust's syntax extension. This allows one to **never** having to run a separate code generation tool. The Thrift IDL is built-into your code.
+[![Build Status](https://travis-ci.org/TheHydroImpulse/data.rs.svg?branch=master)](https://travis-ci.org/TheHydroImpulse/data.rs)
 
-(This should convince you that Rust is pretty epic.)
+WIP!
+
+A [fressian](https://github.com/Datomic/fressian) implementation in Rust.
+
+What's fressian? We'll, it's a data encoding specification that has very high goals.
+
+* self-describing: Fressian is a byte-code driven format.
+* schema-free: There's no IDL like Thrift or ProtoBuf. Readers don't need any extra 
+               information before reading.
+* extensible: Readers and Writers are completely independent. A writer can implement new named
+              types. Readers are not required to understand what's being read. If a reader
+              doesn't know of a custom type, it'll be tagged for later use.
+* batteries-included: Lots of built-in data types.
+* binary: Need I say more?
+* efficient
+
+The philosophy of data.rs is that of values. Data is driving the encoding, nothing else. Thus,
+there is no such thing as references or objects. Just plain values.
+
+It also supports many different things like domain-specific compression, packed encoding, and
+chunked encoding.
 
 # Installation
 
@@ -11,51 +31,20 @@ Sigh. This is quite a manual process for Rust libraries... But, only for now.
 1. Clone the repo: (Most likely in a submodule or something)
 
 ```bash
-git clone git@github.com:TheHydroImpulse/thrust.git
+git clone git@github.com:TheHydroImpulse/data.rs.git
 ```
 
 2. Build the library:
 
 ```bash
-cd thrust/
+cd data.rs/
 make
 ```
 
-3. Build your library and point to the Thrust crate:
+3. Build your library and point to the data crate:
 
 ```bash
-rustc -Lthrust/target --out-dir target lib.rs
-```
-
-4. Enable the syntax phase for the crate:
-
-```rust
-#![crate_id = "foobar"]
-#![crate_type = "lib"]
-#![features(phase, macro_rules)]
-
-#[phase(syntax)]
-extern crate thrustmacro;
-extern crate thrust
-
-fn main() {
-  let thrust = thrust!(
-    namespace foobar Thrift
-
-    enum Numberz
-    {
-      ONE = 1,
-      TWO,
-      THREE,
-      FIVE = 5,
-      SIX,
-      EIGHT = 8
-    }
-  );
-
-  let server = thrust.server("0.0.0.0", 4555);
-  server.listen();
-}
+rustc -Ldata.rs/target --out-dir target lib.rs
 ```
 
 ## Testing
