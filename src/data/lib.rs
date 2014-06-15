@@ -31,23 +31,6 @@
 //!
 //! FIXME
 
-/// The bytecode specification for data.rs. This bytecode is compatible with fressian (written
-/// originally for the JVM, but completely language independent).
-pub enum Bytecode {
+/// All the default bytecode definitions.
+pub mod bytecode;
 
-}
-
-
-pub trait Writer {
-
-}
-
-pub trait Reader {
-
-}
-
-#[cfg(test)]
-mod test {
-    use super::*;
-
-}
