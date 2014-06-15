@@ -3,21 +3,16 @@ RUSTC_FLAGS ?=
 
 SRC = $(shell find src -name '*.rs')
 
-all: lib macro
+all: lib
 
 lib: $(SRC)
 	mkdir -p target
-	$(RUSTC) --out-dir target src/thrust/lib.rs
+	$(RUSTC) --out-dir target src/data/lib.rs
 
-macro: $(SRC) lib
+test: $(SRC)
 	mkdir -p target
-	$(RUSTC) -Ltarget --out-dir target src/thrustmacro/lib.rs
-
-test: $(SRC) lib macro
-	mkdir -p target
-	RUST_TEST_NOCAPTURE=1 $(RUSTC) --test -Ltarget --out-dir target src/thrusttest/lib.rs
-	./target/thrusttest
-	./test.py compile-fail
+	RUST_TEST_NOCAPTURE=1 $(RUSTC) --test -Ltarget --out-dir target src/data/lib.rs
+	./target/data
 
 clean:
 	@rm -rf target
