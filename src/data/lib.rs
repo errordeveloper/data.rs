@@ -35,3 +35,6 @@
 pub mod bytecode;
 pub mod stream;
 pub mod result;
+pub mod writer;
+pub mod tagged;
+pub mod util;
