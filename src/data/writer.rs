@@ -88,7 +88,6 @@ mod test {
     #[test]
     fn encode_raw_int() {
         let raw = super::encode_int64(5);
-        fail!("foo {}", raw);
     }
 
     #[test]
