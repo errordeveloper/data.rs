@@ -12,6 +12,9 @@ pub trait Writer {
     fn write<T: Encodable>(&mut self, value: T) -> DataResult<()>;
 }
 
+/// Given a normal signed 64-bit integer, produce a raw version of that
+/// in an 8 byte vector of u8s. This is the lowest-level of identity for
+/// the integer.
 pub fn write_raw_int64(i: i64) -> Vec<u8> {
     let u = i as u64;
     let mut buf: Vec<u8> = Vec::with_capacity(8);
@@ -35,8 +38,10 @@ pub trait Encodable {
 }
 
 impl Encodable for int {
+
     fn write(&self) -> Vec<u8> {
         let mut packets: Vec<u8> = Vec::new();
+
         match self.leading_zeros() {
             1..14 => {
                 packets.push(bytecode::INT);
@@ -44,8 +49,10 @@ impl Encodable for int {
             },
             _ => {}
         }
-        Vec::new()
+
+        packets
     }
+
 }
 
 /// DataWriter is the default implementation for the writer.
@@ -54,6 +61,8 @@ pub struct DataWriter {
 }
 
 impl DataWriter {
+
+    /// Create a new data writer with an open stream to begin with.
     pub fn new() -> DataWriter {
         DataWriter {
             stream: Stream::new(true)
@@ -62,6 +71,10 @@ impl DataWriter {
 }
 
 impl Writer for DataWriter {
+
+    /// Encode a given value T that has to implement the local `Encodable` type
+    /// which has all the logic for the actual encoding. This simply appends
+    /// the raw representation to the current stream.
     fn write<T: Encodable>(&mut self, value: T) -> DataResult<()> {
         value.write();
         Ok(())
@@ -75,7 +88,6 @@ mod test {
     #[test]
     fn encode_int() {
         let mut writer = DataWriter::new();
-
         writer.write(5);
     }
 }
