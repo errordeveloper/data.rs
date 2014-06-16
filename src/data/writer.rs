@@ -15,7 +15,7 @@ pub trait Writer {
 /// Given a normal signed 64-bit integer, produce a raw version of that
 /// in an 8 byte vector of u8s. This is the lowest-level of identity for
 /// the integer.
-pub fn write_raw_int64(i: i64) -> Vec<u8> {
+fn encode_int64(i: i64) -> Vec<u8> {
     let u = i as u64;
     let mut buf: Vec<u8> = Vec::with_capacity(8);
 
@@ -44,8 +44,8 @@ impl Encodable for int {
 
         match self.leading_zeros() {
             1..14 => {
-                packets.push(bytecode::INT);
-                packets.push_all_move(write_raw_int64(*self as i64));
+                packets.push(bytecode::INT as u8);
+                packets.push_all_move(encode_int64(*self as i64));
             },
             _ => {}
         }
@@ -84,6 +84,12 @@ impl Writer for DataWriter {
 #[cfg(test)]
 mod test {
     use super::*;
+
+    #[test]
+    fn encode_raw_int() {
+        let raw = super::encode_int64(5);
+        fail!("foo {}", raw);
+    }
 
     #[test]
     fn encode_int() {

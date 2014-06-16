@@ -5,7 +5,7 @@ pub struct Bytecode(int);
 /// A macro to easily create bytecodes.
 macro_rules! def(
     ($inp:ident $sp:expr) => (
-        pub static $inp: u8 = $sp;
+        pub static $inp: int = $sp;
     );
 )
 
