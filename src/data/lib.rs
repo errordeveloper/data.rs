@@ -33,7 +33,8 @@
 
 /// All the default bytecode definitions.
 pub mod bytecode;
-pub mod stream;
+pub mod encode;
+pub mod encodable;
 pub mod result;
 pub mod writer;
 pub mod tagged;
