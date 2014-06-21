@@ -1,5 +1,3 @@
-use std::num::Bitwise;
-
 use encode;
 use bytecode;
 
