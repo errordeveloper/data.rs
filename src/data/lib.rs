@@ -1,6 +1,6 @@
 #![crate_id = "data"]
 #![crate_type = "lib"]
-#![feature(globs, macro_rules)]
+#![feature(globs, macro_rules, default_type_params)]
 
 //! ## Introduction
 //!
@@ -30,6 +30,8 @@
 //! ## Usage
 //!
 //! FIXME
+
+extern crate serialize;
 
 /// All the default bytecode definitions.
 pub mod bytecode;
