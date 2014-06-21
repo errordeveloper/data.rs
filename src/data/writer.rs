@@ -188,14 +188,13 @@ mod test {
     use std::io::MemWriter;
 
     #[test]
-    fn sint() {
+    fn encode_i64() {
         let mut writer = MemWriter::new();
         {
             let mut encoder = Encoder::new(&mut writer);
             let _ = 5i64.encode(&mut encoder);
         }
 
-        fail!("{}", writer.unwrap());
     }
 
 }
