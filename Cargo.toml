@@ -1,0 +1,10 @@
+[project]
+
+name = "data"
+version = "0.1.0"
+authors = [ "Daniel Fagnan <dnfagnan@gmail.com>" ]
+
+[[lib]]
+
+name = "data"
+path = "src/data/lib.rs"
