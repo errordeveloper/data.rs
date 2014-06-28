@@ -24,7 +24,10 @@ impl<'a> Encoder<'a> {
 }
 
 impl<'a> serialize::Encoder<IoError> for Encoder<'a> {
-    fn emit_nil(&mut self) -> IoResult<()> { Ok(()) }
+    fn emit_nil(&mut self) -> IoResult<()> {
+        write!(self.wr, "{}", bytecode::NULL);
+        Ok(())
+    }
 
     fn emit_uint(&mut self, v: uint) -> IoResult<()> {
         Ok(())
@@ -41,6 +44,10 @@ impl<'a> serialize::Encoder<IoError> for Encoder<'a> {
     fn emit_int(&mut self, v: int) -> IoResult<()> { Ok(()) }
     fn emit_i64(&mut self, v: i64) -> IoResult<()> {
         let u = v as u64;
+
+        // Transmit the bytecode
+        write!(self.wr, "{}", bytecode::INT);
+
         write!(self.wr, "{}", (u >> 56) as u8);
         write!(self.wr, "{}", (u >> 48) as u8);
         write!(self.wr, "{}", (u >> 40) as u8);
@@ -49,9 +56,14 @@ impl<'a> serialize::Encoder<IoError> for Encoder<'a> {
         write!(self.wr, "{}", (u >> 16) as u8);
         write!(self.wr, "{}", (u >> 8) as u8);
         write!(self.wr, "{}", (u >> 0) as u8);
+
         Ok(())
     }
-    fn emit_i32(&mut self, v: i32) -> IoResult<()> { Ok(()) }
+
+    fn emit_i32(&mut self, v: i32) -> IoResult<()> {
+        write!(self.wr, "{}", bytecode::INT_PACKED_5_ZERO + (v >> 32) as int);
+        Ok(())
+    }
     fn emit_i16(&mut self, v: i16) -> IoResult<()> { Ok(()) }
     fn emit_i8(&mut self, v: i8) -> IoResult<()> { Ok(()) }
 
