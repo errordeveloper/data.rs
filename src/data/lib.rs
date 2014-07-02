@@ -35,9 +35,7 @@ extern crate serialize;
 
 /// All the default bytecode definitions.
 pub mod bytecode;
-pub mod encode;
-pub mod encodable;
 pub mod result;
-pub mod writer;
+pub mod encoder;
 pub mod tagged;
 pub mod util;

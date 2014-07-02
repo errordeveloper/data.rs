@@ -4,7 +4,6 @@ use serialize;
 use serialize::Encodable;
 use std::io::{IoError, IoResult, Writer};
 
-use encode;
 use bytecode;
 
 /// DataWriter is the default implementation for the writer.
