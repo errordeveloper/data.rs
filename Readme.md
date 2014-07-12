@@ -1,4 +1,4 @@
-# data.rs [![Build Status](https://travis-ci.org/TheHydroImpulse/data.rs.svg?branch=master)](https://travis-ci.org/TheHydroImpulse/data.rs) [![Stories in Ready](https://badge.waffle.io/thehydroimpulse/data.rs.png?label=ready&title=Ready)](https://waffle.io/thehydroimpulse/data.rs) 
+# data.rs [![Build Status](https://travis-ci.org/thehydroimpulse/data.rs.svg?branch=master)](https://travis-ci.org/thehydroimpulse/data.rs) [![Stories in Ready](https://badge.waffle.io/thehydroimpulse/data.rs.png?label=ready&title=Ready)](https://waffle.io/thehydroimpulse/data.rs) 
 WIP!
 
 A [fressian](https://github.com/Datomic/fressian) implementation in Rust.

@@ -1,5 +1,6 @@
 RUSTC ?= rustc
 RUSTC_FLAGS ?=
+CARGO ?= cargo
 
 SRC = $(shell find src -name '*.rs')
 
@@ -10,9 +11,7 @@ lib: $(SRC)
 	$(RUSTC) --out-dir target src/data/lib.rs
 
 test: $(SRC)
-	mkdir -p target
-	RUST_TEST_NOCAPTURE=1 $(RUSTC) --test -Ltarget --out-dir target src/data/lib.rs
-	./target/data
+	$(CARGO) test
 
 clean:
 	@rm -rf target

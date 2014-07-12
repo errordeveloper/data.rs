@@ -1,5 +1,6 @@
 #![crate_id = "data"]
 #![crate_type = "lib"]
+#![allow(unused_variable, unused_must_use, unused_imports)]
 #![feature(globs, macro_rules, default_type_params)]
 
 //! ## Introduction

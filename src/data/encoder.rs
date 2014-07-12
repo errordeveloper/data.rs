@@ -198,14 +198,4 @@ mod test {
     use serialize::Encodable;
     use std::io::MemWriter;
 
-    #[test]
-    fn encode_i64() {
-        let mut writer = MemWriter::new();
-        {
-            let mut encoder = Encoder::new(&mut writer);
-            let _ = 5i64.encode(&mut encoder);
-        }
-
-    }
-
 }
